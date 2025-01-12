@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Cursos_web</title>
+  </head>
+  <body>
+    <header>
+      <img src="/iconis/logo.png" id="logo">
+      <a href="Inicio.html"><img src="/iconis/inicio.png" id="iconeinicio"></a>
+      <img id='imgmenu' src="/iconis/menu.png" onclick="abrirmenu()">
+    </header>
+    <div id="barrademenu"></div>
+    <br><br><br><br><h1 id="tituloformulario">Formulário de Inscrição</h1>
+    <form action="/submit" method="post" id="formularioprof">
+        <!-- Informações Pessoais -->
+        <fieldset>
+            <legend>Informações Pessoais</legend>
+            <label for="first-name">Nome:</label>
+            <input type="text" id="nomealuno" name="first-name" required>
+
+            <label for="last-name">Sobrenome:</label>
+            <input type="text" id="sobrenomealuno" name="last-name" required>
+
+            <label for="dob">Data de Nascimento:</label>
+            <input type="date" id="nascaluno" name="dob" required>
+
+            <label for="gender">Gênero:</label>
+            <select id="gender" name="gender">
+                <option value="male">Masculino</option>
+                <option value="female">Feminino</option>
+                <option value="other">Outro</option>
+                <option value="prefer-not-to-say">Prefiro não dizer</option>
+            </select>
+        </fieldset>
+
+         Informações de Contato 
+        <fieldset>
+            <legend>Informações de Contato</legend>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Telefone:</label>
+            <input type="tel" id="phone" name="phone" pattern="[0-9]{10,15}" placeholder="1234567890" required>
+
+            <label for="address">Endereço:</label>
+            <textarea id="address" name="address" rows="4" required></textarea>
+        </fieldset>
+
+         
+        <fieldset>
+            <legend>Pessoa</legend>
+            <input type="radio" id="interest1" name="interests" value="sports"> Professor
+            <input type="radio" id="interest2" name="interests" value="music"> Estudante
+            </textarea>
+        </fieldset>
+        <fieldset>
+            <label for="gender">Curso:</label>
+            <select id="gender" name="gender">
+                <option value="male">TI</option>
+                <option value="female">Eletromecanica</option>
+                <option value="other">RH</option>
+                 <option value="other">Administração</option>
+                <option value="prefer-not-to-say">Prefiro não dizer</option>
+            </select>
+        </fieldset>
+        <!-- Botão de Envio -->
+        <button type="submit" onclick="cadastrarprofessores()">Cadastrar aluno</button>
+      
+    </form>
+
+  </body>
+
+</html>
