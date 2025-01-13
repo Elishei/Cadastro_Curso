@@ -5,6 +5,7 @@ import { createConnection } from 'mysql2';
 //app 
 const app = express()
 
+
 //Configurando Conexão 
 const conexao = createConnection({
    host: 'localhost',
@@ -19,11 +20,3 @@ conexao.connect(function(erro){
 })
 
 
-//Rota 
-app.get('/', function( req, res){
-res.write('Hello World Utilizando o nomdemon');
-res.end();
-});
-
-//Servidor
-app.listen(3000);
