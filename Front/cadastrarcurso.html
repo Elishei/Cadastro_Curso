@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Cursos_web</title>
+  </head>
+  <body>
+
+    <header>
+      <img src="iconis/logo.png" id="logo">
+      <a href="Inicio.html"><img src="iconis/inicio.png" id="iconeinicio"></a>
+      <img id='imgmenu' src="iconis/menu.png" onclick="abrirmenu()">
+    </header>
+
+    <div id="barrademenu"></div>
+
+      <br><br><br><br><form id="formulariocurso"><fieldset>
+              <legend>Informações do Curso</legend>
+              <label for="course-name">Nome do Curso:</label>
+              <input type="text" id="nomecurso" name="course-name" required>
+
+              <!--<label for="course-description">Descrição:</label>
+              <textarea id="course-description" name="course-description" rows="4" required></textarea>-->
+
+              <label for="start-date">Data de Início:</label>
+              <input type="date" id="datainit" name="start-date" required>
+
+              <label for="end-date">Data de Término:</label>
+              <input type="date" id="dataterm" name="end-date" required>
+
+              <label for="mode">Modalidade:</label>
+              <select id="mode" name="mode" required>
+                  <option value="presencial">Presencial</option>
+                  <option value="online">Online</option>
+              </select>
+
+              <!--<label for="instructor">Instrutor:</label>
+              <input type="text" id="instructor" name="instructor" required>-->
+          </fieldset>
+
+          <!-- Botão de Envio -->
+          <button type="submit">Cadastrar Curso</button>
+      </form>
+    </header>
+    <a href="listcurso.html"><div class="visualisar"><h3>Listar Cadastros</h3></div></a>
+    <script src="routers/materia.js" defer></script>
+    
+    </body>
+</html>

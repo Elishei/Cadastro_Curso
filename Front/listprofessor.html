@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    
+    <title>Cursos_web</title>
+  </head>
+  <body >
+
+    <header>
+      <img src="iconis/logo.png" id="logo">
+      <a href="Inicio.html"><img src="iconis/inicio.png" id="iconeinicio"></a>
+      <img id='imgmenu' src="iconis/menu.png" onclick="abrirmenu()">
+    </header>
+
+    <div id="barrademenu"></div>
+    <br><br><br><br><h1 id="tituloformulario">lista de Professores</h1>
+    <div id="divtable">
+    <div class="adornotabela">
+    <table  class="tabela">
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Sobrenome</th>
+              <th>Nascimento</th>
+              <th>Genero</th>
+              <th>Curso</th>
+          </tr>
+      </thead>
+      <tbody id="entidades-professores">
+      </tbody>
+  </table>
+  <a href="cadastrarprofessor.html" class="adicionarmais"><button>Adicionar mais</button></a>
+</div>
+</div>
+<script src="routers/professor.js"></script>
+  </body>
+</html>
