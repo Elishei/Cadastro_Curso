@@ -27,6 +27,7 @@
               <th>Sobrenome</th>
               <th>Nascimento</th>
               <th>Genero</th>
+              <th>Ações</th>
           </tr>
       </thead>
       <tbody id="entidades-aluno">
@@ -34,6 +35,27 @@
   </table>
   <a href="cadastraraluno.html" class="adicionarmais"><button>Adicionar mais</button></a>
 </div>
+</div>
+<div id="modal-editar" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="fecharModal()">&times;</span>
+    <h2>Editar Aluno</h2>
+    <form id="form-editar">
+      <input type="hidden" id="editar-id">
+      <label for="editar-nome">Nome:</label>
+      <input type="text" id="editar-nome" required>
+      <label for="editar-sobrenome">Sobrenome:</label>
+      <input type="text" id="editar-sobrenome" required>
+      <label for="editar-nascimento">Nascimento:</label>
+      <input type="date" id="editar-nascimento" required>
+      <label for="editar-genero">Gênero:</label>
+      <select id="editar-genero" required>
+        <option value="M">Masculino</option>
+        <option value="F">Feminino</option>
+      </select>
+      <button type="submit">Salvar</button>
+    </form>
+  </div>
 </div>
 <script src="routers/aluno.js"></script>
   </body>

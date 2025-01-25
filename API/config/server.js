@@ -33,12 +33,9 @@ function criarRotaDeCadastro(app, rota, tabela, atributos) {
         });
     });
 }
-
 criarRotaDeCadastro(app, '/cadastrar-aluno', 'alunos', ['nome', 'sobrenome', 'nascimento', 'genero']);
 criarRotaDeCadastro(app, '/cadastrar-professor', 'professores', ['nome', 'sobrenome', 'nascimento', 'genero','curso']);
 criarRotaDeCadastro(app, '/cadastrar-curso', 'cursos', ['nome', 'data_inicio', 'data_termino', 'modalidade']);
-
-
 
 
 /*função: mostrando cadastros*/
@@ -53,15 +50,74 @@ function criarrotasdelistagem(app, rota, entidade){
         });
     })
 };
-
 criarrotasdelistagem(app,'/listagem-aluno', 'alunos')
 criarrotasdelistagem(app,'/listagem-professor', 'professores')
 criarrotasdelistagem(app,'/listagem-curso', 'cursos')
 
 
+/*função: apagando cadastro */
+function criarRotaDeDelecao(app, rota, tabela, colunaId) {
+    app.delete(rota, (req, res) => {
+        const id = req.params.id;
+        const sql = `DELETE FROM ${tabela} WHERE ${colunaId} = ?`;
+
+        conexao.query(sql, [id], (err, resultado) => {
+            if (err) {
+                console.error(`Erro ao apagar na tabela ${tabela}:`, err);
+                res.status(500).json({ mensagem: `Erro ao apagar na tabela ${tabela}.` });
+            } else {
+                res.status(200).json({ mensagem: `${tabela.slice(0, -1)} apagado com sucesso!` });
+            }
+        });
+    });
+}
+criarRotaDeDelecao(app, '/apagar-aluno/:id', 'alunos', 'id_aluno');
+criarRotaDeDelecao(app, '/apagar-professor/:id', 'professores', 'id_professor');
+criarRotaDeDelecao(app, '/apagar-curso/:id', 'cursos', 'id_curso');
 
 
+// Atualizar um aluno pelo ID
+function CriarRotaAtualizar(app, rotaget, rotaput, tabela, id) {
+    const id_busca = id;
 
+    // Rota para buscar o item pelo ID
+    app.get(rotaget, (req, res) => {
+        const id = req.params.id;
+        const query = `SELECT * FROM ${tabela} WHERE ${id_busca} = ?`;
+        conexao.query(query, [id], (error, results) => {
+            if (error) {
+                res.status(500).send('Erro ao buscar a entidade.');
+            } else {
+                res.json(results[0]); // Envia apenas o registro correspondente
+            }
+        });
+    });
+
+    // Rota para atualizar o item pelo ID
+    app.put(rotaput, (req, res) => {
+        const id = req.params.id;
+        const campos = req.body; // Captura os campos enviados no corpo da requisição
+        const colunas = Object.keys(campos)
+            .map(coluna => `${coluna} = ?`)
+            .join(', ');
+        const valores = [...Object.values(campos), id];
+        const query = `UPDATE ${tabela} SET ${colunas} WHERE ${id_busca} = ?`;
+
+        conexao.query(query, valores, (error, results) => {
+            if (error) {
+                console.error('Erro ao executar a query:', error);
+                res.status(500).send('Erro ao atualizar a entidade.');
+            } else {
+                res.send('Entidade atualizada com sucesso!');
+            }
+        });
+    });
+}
+
+
+CriarRotaAtualizar(app, '/aluno-edit/:id','/aluno/:id', 'alunos', 'id_aluno')
+CriarRotaAtualizar(app, '/professor-edit/:id','/professor/:id', 'professores', 'id_professor')
+CriarRotaAtualizar(app, '/curso-edit/:id','/curso/:id', 'cursos', 'id_curso')
 
 app.get('',(req, res)=>{
     res.write('porta rodando com sucesso!')

@@ -27,13 +27,32 @@
               <th>Inicio</th>
               <th>Término</th>
               <th>Modalidade</th>
+              <th>Ações</th>
           </tr>
       </thead>
-      <tbody id="entidades-curos">
+      <tbody id="entidades-cursos">
       </tbody>
   </table>
-  <a href="cadastrarprofessor.html" class="adicionarmais"><button>Adicionar mais</button></a>
+  <a href="cadastrarcurso.html" class="adicionarmais"><button>Adicionar mais</button></a>
 </div>
+</div>
+<div id="modal-editar" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="fecharModal()">&times;</span>
+    <h2>Editar Aluno</h2>
+    <form id="form-editarcurso">
+      <input type="hidden" id="editar-id">
+      <label for="editar-nome">Nome:</label>
+      <input type="text" id="editar-nome" required>
+      <label for="editar-datainicio">Data/Inicio:</label>
+      <input type="date" id="editar-datainicio" required>
+      <label for="editar-datatermino">Data/Término:</label>
+      <input type="date" id="editar-datatermino" required>
+      <label for="editar-modalidade">Modalidade:</label>
+      <input type="text" id="editar-modalidade" required>
+      <button type="submit">Salvar</button>
+    </form>
+  </div>
 </div>
 <script src="routers/materia.js"></script>
   </body>
