@@ -53,12 +53,17 @@ document.addEventListener('DOMContentLoaded', () => {
             tbody.appendChild(row);
         } else {
         data.forEach(entidade => {
+            const nascimento = new Date(entidade.nascimento);
+            const ano = nascimento.getFullYear();
+            const mes = String(nascimento.getMonth() + 1).padStart(2, '0'); // Adiciona zero à esquerda
+            const dia = String(nascimento.getDate()).padStart(2, '0'); // Adiciona zero à esquerda
+            const nascimentoFormatado = `${dia}-${mes}-${ano}`;
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${entidade.id_professor}</td>
                 <td>${entidade.nome}</td>
                 <td>${entidade.sobrenome}</td>
-                <td>${entidade.nascimento}</td>
+                <td>${nascimentoFormatado}</td>
                 <td>${entidade.genero}</td>
                 <td>${entidade.curso}</td>
                 <td>
@@ -142,4 +147,26 @@ document.getElementById('form-editarprof').addEventListener('submit', (e) => {
         })
         .catch(error => console.error('Erro ao atualizar aluno:', error));
 });
+document.addEventListener('DOMContentLoaded', () => {
+    const searchBar = document.getElementById('search-bar');
+    const tbody = document.getElementById('entidades-professores');
+  
+    searchBar.addEventListener('keyup', () => {
+      const query = searchBar.value.toLowerCase();
+      const rows = tbody.querySelectorAll('tr');
+  
+      rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        const textContent = Array.from(cells)
+          .map(cell => cell.textContent.toLowerCase())
+          .join(' ');
+        
+        if (textContent.includes(query)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+  });
 

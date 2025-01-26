@@ -52,12 +52,24 @@ document.addEventListener('DOMContentLoaded', () => {
             tbody.appendChild(row);
         } else {
         data.forEach(entidade => {
+            // Converte a data de inicio para o formato YYYY-MM-DD
+            const inicio = new Date(entidade.data_inicio);
+            const ano = inicio.getFullYear();
+            const mes = String(inicio.getMonth() + 1).padStart(2, '0'); // Adiciona zero à esquerda
+            const dia = String(inicio.getDate()).padStart(2, '0'); // Adiciona zero à esquerda
+            const inicioform = `${dia}-${mes}-${ano}`;
+            // Converte a data de inicio para o formato YYYY-MM-DD
+            const termino = new Date(entidade.data_termino);
+            const anot = termino.getFullYear();
+            const mest = String(termino.getMonth() + 1).padStart(2, '0'); // Adiciona zero à esquerda
+            const diat = String(termino.getDate()).padStart(2, '0'); // Adiciona zero à esquerda
+            const terminoform = `${diat}-${mest}-${anot}`;
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${entidade.id_curso}</td>
                 <td>${entidade.nome}</td>
-                <td>${entidade.data_inicio}</td>
-                <td>${entidade.data_termino}</td>
+                <td>${inicioform}</td>
+                <td>${terminoform}</td>
                 <td>${entidade.modalidade}</td>
                 <td>
                 <button class="btn-editar" onclick="editarCurso(${entidade.id_curso})">✏️</button>
@@ -141,3 +153,26 @@ document.getElementById('form-editarcurso').addEventListener('submit', (e) => {
         })
         .catch(error => console.error('Erro ao atualizar curso:', error));
 });
+document.addEventListener('DOMContentLoaded', () => {
+    const searchBar = document.getElementById('search-bar');
+    const tbody = document.getElementById('entidades-cursos');
+  
+    searchBar.addEventListener('keyup', () => {
+      const query = searchBar.value.toLowerCase();
+      const rows = tbody.querySelectorAll('tr');
+  
+      rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        const textContent = Array.from(cells)
+          .map(cell => cell.textContent.toLowerCase())
+          .join(' ');
+        
+        if (textContent.includes(query)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+  });
+
